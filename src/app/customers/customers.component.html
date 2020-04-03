@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="jumbotron">
+    <form #frm="ngForm" (ngSubmit)="addCustomer(frm)">
+      <h2>  Customers </h2>
+      <div class="form-group">
+        <label for="name">
+          Name:
+        </label>
+        <br>
+        <input class="form-control" type="text" name="name"
+               ngModel
+               autofocus
+               #nameCustomer="ngModel"
+               required maxlength="50" minlength="3" pattern="">
+      </div>
+<!--      <div *ngIf="nameCustomer.touched" class="alert alert-danger">-->
+        <div *ngIf="nameCustomer.errors?.required" class="alert alert-danger">
+          Tên bắt buộc nhập
+        </div>
+      <div *ngIf="nameCustomer.errors?.minlength" class="alert alert-danger">
+        Tên phải ít nhất 4 kí tự.
+      </div>
+      <div *ngIf="nameCustomer.errors?.maxlength" class="alert alert-danger">
+        Tên tối đa 50 kí tự.
+      </div>
+
+<!--      </div>-->
+      <div class="form-group">
+        <label for="gender">
+          Gender:
+        </label>
+        <br>
+        <select class="form-control" type="text" name="gender"
+                ngModel
+                #genderCustomer="ngModel"
+                required maxlength="555" pattern="">
+          <option value="Nam">Nam</option>
+          <option value="Nữ">Nữ</option>
+          <option value="Khác">Khác</option>
+        </select>
+      </div>
+<!--      <div *ngIf="genderCustomer.touched" class="alert alert-danger">-->
+        <div *ngIf="genderCustomer.errors?.required" class="alert alert-danger">
+          Giới tính bắt buộc chọn
+        </div>
+
+<!--      </div>-->
+      <div class="form-group">
+        <label for="contact">
+          Contact:
+        </label>
+        <br>
+        <input  class="form-control"  type="number" name="contact" minlength="10" ngModel #contactCustomer="ngModel" required>
+      </div>
+<!--      <div *ngIf="contactCustomer.touched" class="alert alert-danger">-->
+        <div *ngIf="contactCustomer.errors?.required" class="alert alert-danger">
+          Số điện thoại bắt buộc nhập, vui lòng nhập số !
+        </div>
+      <div *ngIf="contactCustomer.errors.minlength" class="alert alert-danger">
+        Số điện thoại phải ít nhất 10 số !
+      </div>
+
+<!--      </div>-->
+      <div class="form-group">
+        <label for="email">
+          Email:
+        </label>
+        <br>
+        <input class="form-control" type="text" name="email" ngModel #emailCustomer="ngModel" required email>
+      </div>
+<!--      <div *ngIf="emailCustomer.touched" class="alert alert-danger">-->
+        <div *ngIf="emailCustomer.errors?.required" class="alert alert-danger">
+          Email bắt buộc nhập
+        </div>
+      <div *ngIf="emailCustomer.errors?.email" class="alert alert-danger">
+        Nhập đúng định dạng email !
+      </div>
+
+<!--      </div>-->
+      <button type="submit" name="button" class="btn btn-primary"[disabled]="frm.invalid">Add Customer</button>
+    </form>
+  </div>
+</div>
+<hr>
+<ul class="list-group">
+  <li *ngFor="let customer of customList" class="list-group-item">
+    <tr>
+    <th>Tên</th>
+    <td> {{customer.name}}</td>
+  </tr>
+    <tr>
+      <th>Giới tính</th>
+      <td> {{customer.gender}}</td>
+    </tr>
+    <tr>
+      <th>Số điện thoại</th>
+      <td> {{customer.contact}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td> {{customer.email}}</td>
+    </tr>
+  </li>
+</ul>
+
+{{frm.value | json}}
