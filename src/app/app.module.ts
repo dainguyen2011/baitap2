@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CustomersComponent } from './customers/customers.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,11 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: '', component: CustomersComponent},
+      { path: 'customers', component: CustomersComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
